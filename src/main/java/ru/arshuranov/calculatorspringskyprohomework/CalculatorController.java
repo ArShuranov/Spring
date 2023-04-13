@@ -18,8 +18,12 @@ public class CalculatorController {
     }
 
     @GetMapping(path = "/calculator/plus")
-    public String plus(@RequestParam(value = "num1", required = false) String num1, @RequestParam(value = "num2", required = false) String num2) {
-        return calculatorService.sum(num1, num2);
+    public String plus(@RequestParam(value = "num1", required = false) Integer num1, @RequestParam(value = "num2", required = false) Integer num2) {
+        if ((num1 == null) || (num2 == null)) {
+            return "Необходимо передать два числа";
+        } else {
+            return calculatorService.sum(num1, num2);
+        }
     }
 
     @GetMapping(path = "/calculator/minus")

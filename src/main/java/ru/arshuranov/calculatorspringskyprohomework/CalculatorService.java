@@ -3,7 +3,7 @@ package ru.arshuranov.calculatorspringskyprohomework;
 public interface CalculatorService {
     String greeting();
 
-    String sum(String num1, String num2);
+    String sum(Integer num1, Integer num2);
 
     String subtraction(int num1, int num2);
 
