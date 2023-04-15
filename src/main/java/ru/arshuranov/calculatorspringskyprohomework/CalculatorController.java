@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CalculatorController {
     private final CalculatorService calculatorService;
+
     public CalculatorController(CalculatorService calculatorService) {
         this.calculatorService = calculatorService;
     }
@@ -16,8 +17,43 @@ public class CalculatorController {
         return calculatorService.greeting();
     }
 
-    @GetMapping(path = "/calculator")
-    public String sum(@RequestParam("plus") int num1, int num2) {
-        return calculatorService.sum(num1, num2);
+    @GetMapping(path = "/calculator/plus")
+    public String plus(@RequestParam(value = "num1", required = false) Integer num1, @RequestParam(value = "num2", required = false) Integer num2) {
+        if ((num1 == null) || (num2 == null)) {
+            return "Необходимо передать два числа";
+        } else {
+            return num1 + " + " + num2 + " = " + calculatorService.sum(num1, num2);
+        }
+    }
+
+    @GetMapping(path = "/calculator/minus")
+    public String minus(@RequestParam(value = "num1", required = false) Integer num1, @RequestParam(value = "num2", required = false) Integer num2) {
+        if ((num1 == null) || (num2 == null)) {
+            return "Необходимо передать два числа";
+        } else {
+            return num1 + " - " + num2 + " = " + calculatorService.subtraction(num1, num2);
+        }
+    }
+
+    @GetMapping(path = "/calculator/multiply")
+    public String multiply(@RequestParam(value = "num1", required = false) Integer num1, @RequestParam(value = "num2", required = false) Integer num2) {
+        if ((num1 == null) || (num2 == null)) {
+            return "Необходимо передать два числа";
+        } else {
+            return num1 + " * " + num2 + " = " + calculatorService.multiply(num1, num2);
+        }
+    }
+
+    @GetMapping(path = "/calculator/divide")
+    public String divide(@RequestParam(value = "num1", required = false) Integer num1, @RequestParam(value = "num2", required = false) Integer num2) {
+        if ((num1 == null) || (num2 == null)) {
+            return "Необходимо передать два числа";
+        } else {
+            if (num2 == 0) {
+                return "На 0 делить нельзя";
+            } else {
+                return num1 + " / " + num2 + " = " + calculatorService.divide(num1, num2);
+            }
+        }
     }
 }

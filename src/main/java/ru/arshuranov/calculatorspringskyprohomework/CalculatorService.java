@@ -2,6 +2,13 @@ package ru.arshuranov.calculatorspringskyprohomework;
 
 public interface CalculatorService {
     String greeting();
-    String sum (int num1, int num2);
+
+    Integer sum(Integer num1, Integer num2);
+
+    Integer subtraction(Integer num1, Integer num2);
+
+    Integer multiply(Integer num1, Integer num2);
+
+    Integer divide(Integer num1, Integer num2);
 
 }
