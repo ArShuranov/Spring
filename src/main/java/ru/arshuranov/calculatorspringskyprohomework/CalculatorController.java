@@ -22,26 +22,38 @@ public class CalculatorController {
         if ((num1 == null) || (num2 == null)) {
             return "Необходимо передать два числа";
         } else {
-            return calculatorService.sum(num1, num2);
+            return num1 + " + " + num2 + " = " + calculatorService.sum(num1, num2);
         }
     }
 
     @GetMapping(path = "/calculator/minus")
-    public String minus(@RequestParam("num1") int num1, @RequestParam("num2") int num2) {
-        return calculatorService.subtraction(num1, num2);
+    public String minus(@RequestParam(value = "num1", required = false) Integer num1, @RequestParam(value = "num2", required = false) Integer num2) {
+        if ((num1 == null) || (num2 == null)) {
+            return "Необходимо передать два числа";
+        } else {
+            return num1 + " - " + num2 + " = " + calculatorService.subtraction(num1, num2);
+        }
     }
 
     @GetMapping(path = "/calculator/multiply")
-    public String multiply(@RequestParam("num1") int num1, @RequestParam("num2") int num2) {
-        return calculatorService.multiply(num1, num2);
+    public String multiply(@RequestParam(value = "num1", required = false) Integer num1, @RequestParam(value = "num2", required = false) Integer num2) {
+        if ((num1 == null) || (num2 == null)) {
+            return "Необходимо передать два числа";
+        } else {
+            return num1 + " * " + num2 + " = " + calculatorService.multiply(num1, num2);
+        }
     }
 
     @GetMapping(path = "/calculator/divide")
-    public String divide(@RequestParam("num1") int num1, @RequestParam("num2") int num2) {
-        if (num2 == 0) {
-            return new String("На 0 делить нельзя");
+    public String divide(@RequestParam(value = "num1", required = false) Integer num1, @RequestParam(value = "num2", required = false) Integer num2) {
+        if ((num1 == null) || (num2 == null)) {
+            return "Необходимо передать два числа";
         } else {
-            return calculatorService.divide(num1, num2);
+            if (num2 == 0) {
+                return "На 0 делить нельзя";
+            } else {
+                return num1 + " / " + num2 + " = " + calculatorService.divide(num1, num2);
+            }
         }
     }
 }
